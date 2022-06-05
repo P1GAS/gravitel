@@ -1,0 +1,10 @@
+.dashboard-progress {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.dashboard-text {
+  display: flex;
+  justify-content: space-between;
+}

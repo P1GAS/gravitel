@@ -1,0 +1,32 @@
+body {
+  font-family: "Fira Sans", sans-serif;
+  background-color: #eaf0f5;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  max-width: 1030px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.default-card {
+  width: 350px;
+}
+
+.content-center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direction-rtl {
+  direction: rtl;
+}
+
+@import url("./header.css");
+@import url("./dashboard.css");
