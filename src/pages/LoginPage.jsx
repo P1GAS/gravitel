@@ -17,12 +17,10 @@ const LoginPage = ({ handleLogin, loading, error }) => {
       <Card className="default-card">
         <Title>Авторизация</Title>
         {error && (
-          <Text>
-            Ошибка:{" "}
+          <Text type="danger">
+            Ошибка:
             {error.graphQLErrors.map(({ message }, index) => (
-              <>
-                <span key={index}>{message}</span>{" "}
-              </>
+              <span key={index}> {message}</span>
             ))}
           </Text>
         )}
