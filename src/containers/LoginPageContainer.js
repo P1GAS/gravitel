@@ -1,12 +1,12 @@
-import LoginPage from "pages/LoginPage";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "servers/gravitel";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
-const LoginPageContainer = () => {
+import LoginPage from "pages/LoginPage";
+import { LOGIN } from "servers/gravitel";
+
+const LoginPageContainer = ({ setToken, token }) => {
   const [loginFunc, { loading, error }] = useMutation(LOGIN);
-  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const handleLogin = async (username, password) => {
     const res = await loginFunc({

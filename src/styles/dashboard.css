@@ -1,3 +1,9 @@
+.dashboard-error-loader {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
 .dashboard-progress {
   display: flex;
   justify-content: center;
@@ -7,4 +13,8 @@
 .dashboard-text {
   display: flex;
   justify-content: space-between;
+}
+
+.dashboard-text:hover {
+  text-decoration: underline;
 }

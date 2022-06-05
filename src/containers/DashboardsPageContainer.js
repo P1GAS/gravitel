@@ -4,22 +4,21 @@ import { Navigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_DASHBOARDS } from "servers/gravitel";
 
-const DashboardsPageContainer = () => {
+const DashboardsPageContainer = ({ token }) => {
   const { loading, error, data } = useQuery(GET_DASHBOARDS);
 
-  const [token, setToken] = useState(localStorage.getItem("token"));
   const [dashboards, setDashboards] = useState([
     {
       name: "Сценарии",
       statistics: { active: 4, inactive: 3, completed: 5 },
     },
     {
-      name: "Сценарии",
-      statistics: { active: 4, inactive: 3, completed: 5 },
+      name: "Списки",
+      statistics: { active: 6, inactive: 7, completed: 2 },
     },
     {
-      name: "Сценарии",
-      statistics: { active: 4, inactive: 3, completed: 5 },
+      name: "Диалоги",
+      statistics: { active: 1, inactive: 10, completed: 2 },
     },
   ]);
 
@@ -35,22 +34,12 @@ const DashboardsPageContainer = () => {
     }
   }, [data]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-  };
-
   if (!token) {
     return <Navigate to="/login" replace={true} />;
   }
 
   return (
-    <DashboardsPage
-      logout={logout}
-      loading={loading}
-      error={error}
-      dashboards={dashboards}
-    />
+    <DashboardsPage loading={loading} error={error} dashboards={dashboards} />
   );
 };
 

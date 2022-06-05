@@ -1,5 +1,6 @@
-import { Card, Typography, Progress } from "antd";
 import { useState } from "react";
+
+import { Card, Typography, Progress } from "antd";
 
 const { Text, Title } = Typography;
 
