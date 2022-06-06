@@ -15,7 +15,7 @@ const LoginPage = ({ handleLogin, loading, error }) => {
   return (
     <div className="container content-center">
       <Card className="default-card">
-        <Title>Авторизация</Title>
+        <Title level={3}>Авторизация</Title>
         {error && (
           <Text type="danger">
             Ошибка:
@@ -24,15 +24,11 @@ const LoginPage = ({ handleLogin, loading, error }) => {
             ))}
           </Text>
         )}
-        <Form
-          name="login"
-          layout="vertical"
-          onFinish={submit}
-          autoComplete="off"
-        >
+        <Form name="login" layout="vertical" onFinish={submit}>
           <Form.Item label="Юзернейм" name="username">
             <Input
               value={username}
+              autoComplete="username"
               onChange={(e) => setUsername(e.target.value)}
             />
           </Form.Item>
@@ -40,6 +36,7 @@ const LoginPage = ({ handleLogin, loading, error }) => {
           <Form.Item label="Пароль" name="password">
             <Input.Password
               value={password}
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Item>

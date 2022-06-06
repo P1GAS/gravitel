@@ -5,34 +5,32 @@ import { useQuery } from "@apollo/client";
 import { GET_DASHBOARDS } from "servers/gravitel";
 
 const DashboardsPageContainer = ({ token }) => {
-  const { loading, error, data } = useQuery(GET_DASHBOARDS);
+  const { client, loading, error, data } = useQuery(GET_DASHBOARDS);
 
-  const [dashboards, setDashboards] = useState([
-    {
-      name: "Сценарии",
-      statistics: { active: 4, inactive: 3, completed: 5 },
-    },
-    {
-      name: "Списки",
-      statistics: { active: 6, inactive: 7, completed: 2 },
-    },
-    {
-      name: "Диалоги",
-      statistics: { active: 1, inactive: 10, completed: 2 },
-    },
-  ]);
+  const [dashboards, setDashboards] = useState([]);
 
   useEffect(() => {
     if (data) {
-      const dashboards = data.map((dashboard) => {
-        const [dashboardName, statistics] = Object.entries(dashboard);
+      const { dialogs, lists, scenarios } = data.dashboard;
 
-        return { name: dashboardName, statistics };
-      });
+      const dialogsWithName = { name: "Диалоги", statistics: { ...dialogs } };
+      const listsWithName = { name: "Списки", statistics: { ...lists } };
+      const scenariosWithName = {
+        name: "Сценарии",
+        statistics: { ...scenarios },
+      };
+
+      const dashboards = [dialogsWithName, listsWithName, scenariosWithName];
 
       setDashboards(dashboards);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (!token) {
+      client.resetStore();
+    }
+  }, [token, client]);
 
   if (!token) {
     return <Navigate to="/login" replace={true} />;

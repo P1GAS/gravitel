@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import { ApolloProvider } from "@apollo/client";
 
@@ -11,9 +11,12 @@ import Header from "./Header";
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
+  const navigate = useNavigate();
+
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
+    navigate("/login");
   };
 
   const navigationPath = token ? "/dashboard" : "/login";
@@ -21,19 +24,17 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       {token && <Header logout={logout} />}
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/dashboard"
-            element={<DashboardsPageContainer token={token} />}
-          />
-          <Route
-            path="/login"
-            element={<LoginPageContainer setToken={setToken} token={token} />}
-          />
-          <Route index element={<Navigate to={navigationPath} />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/dashboard"
+          element={<DashboardsPageContainer token={token} />}
+        />
+        <Route
+          path="/login"
+          element={<LoginPageContainer setToken={setToken} token={token} />}
+        />
+        <Route index element={<Navigate to={navigationPath} />} />
+      </Routes>
     </ApolloProvider>
   );
 };
